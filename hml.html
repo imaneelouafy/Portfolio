@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elouafy Imane — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0f1e;
+    --deep: #0d1528;
+    --card: #111827;
+    --border: rgba(255,255,255,0.08);
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f5f0e8;
+    --muted: rgba(245,240,232,0.5);
+    --accent: #4fd1c5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 8vw 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-name span { color: var(--gold); }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--muted);
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .pill {
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .pill.active {
+    background: rgba(201,168,76,0.12);
+    border-color: rgba(201,168,76,0.4);
+    color: var(--gold-light);
+  }
+
+  .hero-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .hero-contact a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero-contact a:hover { color: var(--gold-light); }
+
+  .contact-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 6rem 8vw;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 200px;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: rgba(245,240,232,0.8);
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: border-color 0.3s;
+  }
+
+  .skill-group:hover { border-color: rgba(201,168,76,0.3); }
+
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    color: var(--cream);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-2px);
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--cream);
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tech-badge {
+    background: rgba(79,209,197,0.1);
+    border: 1px solid rgba(79,209,197,0.2);
+    color: var(--accent);
+    padding: 0.2rem 0.65rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .project-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: rgba(201,168,76,0.3);
+    white-space: nowrap;
+  }
+
+  /* ── TIMELINE (Education + Experience) ── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.35rem;
+    top: 0.35rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--navy);
+  }
+
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-org {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-body {
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.7;
+  }
+
+  /* ── CERTS ── */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .cert-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(201,168,76,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+
+  .cert-name {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 0.25rem;
+  }
+
+  .cert-issuer {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* ── LANGUAGES ── */
+  .lang-grid {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .lang-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    text-align: center;
+  }
+
+  .lang-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .lang-level {
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 4rem 8vw;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold-light); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero { padding: 5rem 6vw 3rem; }
+    section { padding: 4rem 6vw; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Full Stack Developer · Big Data · AI</div>
+  <h1 class="hero-name">Elouafy<br><span>Imane</span></h1>
+  <p class="hero-tagline">Technicienne spécialisée en développement Full Stack, passionnée par l'IA et l'exploitation des données massives.</p>
+  <div class="hero-pills">
+    <span class="pill active">Big Data</span>
+    <span class="pill active">Machine Learning</span>
+    <span class="pill">React / Next.js</span>
+    <span class="pill">Python</span>
+    <span class="pill">MySQL · MongoDB</span>
+  </div>
+  <div class="hero-contact">
+    <a href="mailto:imaneelouafy2004@gmail.com"><span class="contact-dot"></span> imaneelouafy2004@gmail.com</a>
+    <a href="tel:0722363784"><span class="contact-dot"></span> 0722363784</a>
+    <a><span class="contact-dot"></span> Tarrast, Inzegane — Maroc</a>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid reveal">
+    <p class="about-text">
+      Après l'obtention d'un Diplôme de Technicien Spécialisé en Développement Digital Full Stack, j'ai poursuivi une <strong style="color:var(--gold-light);font-weight:500;">Licence en Big Data</strong> à l'ESTF Quih Ben Salah. Je prépare actuellement un <strong style="color:var(--gold-light);font-weight:500;">Master en Big Data & Intelligence Artificielle</strong> afin de marier mes compétences en développement avec la puissance de l'IA moderne.
+    </p>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Années d'expérience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Projets réalisés</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Stages complétés</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Compétences</div>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <div class="skill-group-title">Frontend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">Bootstrap</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Next.js</span>
+        <span class="skill-tag">WordPress</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Backend & Bases de données</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">MongoDB</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Data & IA</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Big Data</span>
+        <span class="skill-tag">CNN / Deep Learning</span>
+        <span class="skill-tag">Analyse de données</span>
+        <span class="skill-tag">UX/UI Design</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Outils</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Projets Réalisés</div>
+  <div class="projects-grid reveal">
+
+    <div class="project-card">
+      <div>
+        <div class="project-title">Détection de Mélanomes par CNN</div>
+        <div class="project-desc">Projet en Intelligence Artificielle utilisant les réseaux de neurones convolutifs (CNN) pour l'analyse d'images médicales — détection et segmentation automatique des mélanomes cutanés.</div>
+        <div class="project-tech">
+          <span class="tech-badge">Deep Learning</span>
+          <span class="tech-badge">CNN</span>
+          <span class="tech-badge">Image Analysis</span>
+          <span class="tech-badge">Segmentation</span>
+        </div>
+      </div>
+      <div class="project-year">2025</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-title">Plateforme E-Learning (CAPLOGY)</div>
+        <div class="project-desc">Conception et réalisation complète d'une plateforme de cours en ligne lors d'un stage de 3 mois chez CAPLOGY (distanciel). Gestion des contenus, utilisateurs et parcours pédagogiques.</div>
+        <div class="project-tech">
+          <span class="tech-badge">React</span>
+          <span class="tech-badge">PHP</span>
+          <span class="tech-badge">MySQL</span>
+          <span class="tech-badge">E-Learning</span>
+        </div>
+      </div>
+      <div class="project-year">2025</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-title">Gestion des Adhérents — Chambre de Commerce</div>
+        <div class="project-desc">Développement d'un site web de gestion et d'ajout des adhérents pour la Chambre de Commerce Souss Massa dans le cadre d'un stage d'un mois.</div>
+        <div class="project-tech">
+          <span class="tech-badge">HTML5</span>
+          <span class="tech-badge">PHP</span>
+          <span class="tech-badge">MySQL</span>
+          <span class="tech-badge">Bootstrap</span>
+        </div>
+      </div>
+      <div class="project-year">2024</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-title">Site E-Commerce Dynamique</div>
+        <div class="project-desc">Conception et développement d'un site e-commerce complet avec test de saisie pour améliorer l'expérience utilisateur, et module de gestion des employés par les formations.</div>
+        <div class="project-tech">
+          <span class="tech-badge">HTML5</span>
+          <span class="tech-badge">Bootstrap</span>
+          <span class="tech-badge">JavaScript</span>
+          <span class="tech-badge">PHP</span>
+          <span class="tech-badge">MySQL</span>
+        </div>
+      </div>
+      <div class="project-year">2024</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Expérience</div>
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="timeline-date">Sept. 2025 — Déc. 2025</div>
+      <div class="timeline-title">Stagiaire Développeur Web</div>
+      <div class="timeline-org">CAPLOGY · Distanciel (3 mois)</div>
+      <div class="timeline-body">Conception et réalisation d'une plateforme de cours en ligne (E-learning).</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Avr. 2024 — Mai 2024</div>
+      <div class="timeline-title">Stagiaire Développeur Web</div>
+      <div class="timeline-org">Chambre de Commerce Souss Massa · Agadir</div>
+      <div class="timeline-body">Réalisation d'un site web pour la gestion et l'ajout des adhérents.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Formation</div>
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="timeline-date">2024 — 2025</div>
+      <div class="timeline-title">Master Big Data & Intelligence Artificielle (M1)</div>
+      <div class="timeline-org">En cours</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2024 — 2025</div>
+      <div class="timeline-title">Licence — Infrastructures, Traitement & Analyse de Données Massives (Big Data)</div>
+      <div class="timeline-org">ESTF Quih Ben Salah</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2022 — 2024</div>
+      <div class="timeline-title">Diplôme de Technicien Spécialisé en Développement Digital Full Stack</div>
+      <div class="timeline-org">Formation professionnelle</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2021 — 2022</div>
+      <div class="timeline-title">Baccalauréat en Sciences Physiques</div>
+      <div class="timeline-org">Lycée Hassan El Khayat</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-label">Certifications</div>
+  <div class="certs-grid reveal">
+
+    <div class="cert-card">
+      <div class="cert-icon">📊</div>
+      <div>
+        <div class="cert-name">Foundations: Data, Data, Everywhere</div>
+        <div class="cert-issuer">Google</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">🗄️</div>
+      <div>
+        <div class="cert-name">Architecture des données — Analyse comparative et études de cas</div>
+        <div class="cert-issuer">Orange Digital Center Agadir</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">🎨</div>
+      <div>
+        <div class="cert-name">UX/UI Design for Web and Mobile</div>
+        <div class="cert-issuer">Orange Digital Center Agadir</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="section-label">Langues</div>
+  <div class="lang-grid reveal">
+    <div class="lang-card">
+      <div class="lang-name">Français</div>
+      <div class="lang-level">Courant</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-name">English</div>
+      <div class="lang-level">Proficient</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-name">العربية</div>
+      <div class="lang-level">Langue maternelle</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Elouafy Imane</div>
+  <div class="footer-links">
+    <a href="mailto:imaneelouafy2004@gmail.com">imaneelouafy2004@gmail.com</a>
+    <a href="tel:0722363784">0722363784</a>
+    <a>Tarrast, Inzegane — Maroc</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
